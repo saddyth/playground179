@@ -32,6 +32,9 @@ rectangleArea(width: 10, height: 5)
 //Напишите функцию factorial(of:), которая вычисляет факториал заданного числа.
 
 func factorial(of: Int) -> Int{
+    if of == 0 {
+        return 1
+    }
     var numFactorial = 1
     for i in 1...of {
         numFactorial *= i
@@ -163,4 +166,95 @@ if let palindromeResult = isPalindrome(word: "Radar") {
     print("Строка пустая")
 }
 
+// Task 3.1
+//Напишите функцию fibonacciSequence(count:), которая возвращает массив из первых N чисел последовательности Фибоначчи.
 
+func fibonacciSequence(numberOfFibonacci: Int) -> [Int]? {
+    var fibonacciArr = [Int]()
+    guard numberOfFibonacci != 0 else {
+        return nil
+    }
+    if numberOfFibonacci > 1 {
+        fibonacciArr.append(contentsOf: 0...1)
+        for i in 1..<numberOfFibonacci - 1 {
+            fibonacciArr.append(fibonacciArr[i] + fibonacciArr[i-1])
+        }
+    } else if numberOfFibonacci == 1 {
+        fibonacciArr.append(0)
+        return fibonacciArr
+    }
+  return fibonacciArr
+}
+
+if let fibonacciRes = fibonacciSequence(numberOfFibonacci: 2) {
+    print(fibonacciRes)
+} else {
+    print("Вы ввели 0")
+}
+
+//Task 3.2
+//Поиск простых чисел
+//Напишите функцию findPrimes(upTo:), которая возвращает массив всех простых чисел до заданного числа.
+
+func findPrimes(upTo: Int) -> [Int]? {
+    guard upTo != 0 else{
+        return nil
+    }
+    var primeArr = [1]
+    if upTo == 1 {
+        return primeArr
+    } else {
+        for i in 2..<upTo {
+            if upTo % i != 0 {
+                primeArr.append(i)
+            }
+        }
+    }
+    return primeArr
+}
+
+if let primeRes = findPrimes(upTo: 1) {
+    print(primeRes)
+} else {
+    print("Вы ввели 0")
+}
+
+//Task 3.3
+//Рекурсивный факториал
+//Реализуйте функцию factorialRecursive(of:), которая вычисляет факториал числа рекурсивно.
+func factorialRecursive(_ of: Int) -> Int{
+    if of == 0 {
+        return 1
+    }
+    
+    return of * factorialRecursive(of - 1)
+}
+print(factorialRecursive(6))
+
+
+//Task 3.4
+//Напишите функцию splitString(by:), которая разбивает строку на подстроки по заданному разделителю и возвращает массив строк.
+//Например, для строки "apple,banana,cherry" и разделителя "," результат должен быть ["apple", "banana", "cherry"].
+
+func splitString(mark: String, line: String) -> [String] {
+    let splitedLine = line.components(separatedBy: mark)
+    return splitedLine
+}
+print(splitString(mark: ".", line: "apple.mango.banana"))
+
+//Task 3.5
+//Напишите функцию countLettersAndDigits(_:), которая принимает строку и возвращает количество букв и цифр в ней.
+//Например, для строки "abc123!@#" результат должен быть (letters: 3, digits: 3).
+func countLettersAndDigits(line: String) -> (Int, Int) {
+    var tuple = (letters: 0, digits: 0)
+    for character in line{
+            if character.isNumber{
+                tuple.1 += 1
+            } else if character.isLetter {
+                tuple.0 += 1
+            }
+        }
+    return tuple
+}
+let countResult = countLettersAndDigits(line: "abcd125552")
+print("letters: \(countResult.0), digits: \(countResult.1) ")

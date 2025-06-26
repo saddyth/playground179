@@ -248,6 +248,7 @@
 		BEED56262E0C34D1007A8995 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XM72G87H9Q;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -259,6 +260,7 @@
 		BEED56272E0C34D1007A8995 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XM72G87H9Q;
 				ENABLE_HARDENED_RUNTIME = YES;

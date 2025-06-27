@@ -1,7 +1,6 @@
 
 import Foundation
 
-
 // Task 1.1
 //Напишите функцию greet(name:), которая принимает имя пользователя и выводит приветствие в формате: "Hello, [имя]!".
 func sayHello(name: String) {
@@ -198,15 +197,22 @@ if let fibonacciRes = fibonacciSequence(numberOfFibonacci: 2) {
 //Напишите функцию findPrimes(upTo:), которая возвращает массив всех простых чисел до заданного числа.
 
 func findPrimes(upTo: Int) -> [Int]? {
+    var isPrime = false
     guard upTo != 0 else{
         return nil
     }
-    var primeArr = [1]
+    var primeArr = [Int]()
     if upTo == 1 {
         return primeArr
     } else {
-        for i in 2..<upTo {
-            if upTo % i != 0 {
+        for i in 2...upTo {
+            isPrime = false
+            for j in 2..<i {
+                if i % j == 0 {
+                    isPrime = true
+                }
+            }
+            if !isPrime {
                 primeArr.append(i)
             }
         }
@@ -214,12 +220,11 @@ func findPrimes(upTo: Int) -> [Int]? {
     return primeArr
 }
 
-if let primeRes = findPrimes(upTo: 1) {
+if let primeRes = findPrimes(upTo: 25) {
     print(primeRes)
 } else {
     print("Вы ввели 0")
 }
-
 //Task 3.3
 //Рекурсивный факториал
 //Реализуйте функцию factorialRecursive(of:), которая вычисляет факториал числа рекурсивно.
@@ -227,7 +232,6 @@ func factorialRecursive(_ of: Int) -> Int{
     if of == 0 {
         return 1
     }
-    
     return of * factorialRecursive(of - 1)
 }
 print(factorialRecursive(6))
@@ -266,14 +270,14 @@ print("letters: \(countResult.0), digits: \(countResult.1) ")
 //Пример: convertTemperature(value: 100, from: "C", to: "F") должно вернуть 212.
 
 func convertTemperature(value: Double,from: String, to: String) -> Double{
-    var cToF = (value * 9/5) + 32
-    var cToK = value + 273.15
+    let cToF = (value * 9/5) + 32
+    let cToK = value + 273.15
     
-    var fToC = (value - 32) * 5/9
-    var fToK = fToC + 273.15
+    let fToC = (value - 32) * 5/9
+    let fToK = fToC + 273.15
     
-    var kToC = value - 273.15
-    var kToF = kToC * 9/5 + 32
+    let kToC = value - 273.15
+    let kToF = kToC * 9/5 + 32
     
     if from == to {
         return value

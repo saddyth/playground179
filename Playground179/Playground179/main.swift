@@ -1,6 +1,7 @@
 
 import Foundation
 
+
 // Task 1.1
 //Напишите функцию greet(name:), которая принимает имя пользователя и выводит приветствие в формате: "Hello, [имя]!".
 func sayHello(name: String) {
@@ -258,3 +259,136 @@ func countLettersAndDigits(line: String) -> (Int, Int) {
 }
 let countResult = countLettersAndDigits(line: "abcd125552")
 print("letters: \(countResult.0), digits: \(countResult.1) ")
+
+
+//Task 4.1
+//Напишите функцию convertTemperature(value:from:to:), которая переводит температуру между шкалами Цельсия, Фаренгейта и Кельвина.
+//Пример: convertTemperature(value: 100, from: "C", to: "F") должно вернуть 212.
+
+func convertTemperature(value: Double,from: String, to: String) -> Double{
+    var cToF = (value * 9/5) + 32
+    var cToK = value + 273.15
+    
+    var fToC = (value - 32) * 5/9
+    var fToK = fToC + 273.15
+    
+    var kToC = value - 273.15
+    var kToF = kToC * 9/5 + 32
+    
+    if from == to {
+        return value
+    }
+    
+    switch from {
+    case "C":
+        switch to {
+        case "F": return cToF
+        case "K": return cToK
+        default: return value
+        }
+    case "F":
+        switch to {
+        case "C": return fToC
+        case "K": return fToK
+        default: return value
+        }
+    case "K":
+        switch to {
+        case "C": return kToC
+        case "F": return kToF
+        default: return value
+        }
+    default: return value
+    }
+}
+print(convertTemperature(value: 100,from: "C", to: "K"))
+
+//Task 4.2
+//Напишите функцию commonElements(array1:array2:), которая принимает два массива и возвращает массив с общими элементами.Например, для массивов [1, 2, 3] и [2, 3, 4] результат должен быть [2, 3].
+
+func commonElements(array1: [Int], array2: [Int]) -> [Int]? {
+    guard !array1.isEmpty, !array2.isEmpty else {
+        return nil
+    }
+    let set1 = Set(array1)
+    let set2 = Set(array2)
+    let intersectionArr = Array(set1.intersection(set2))
+    return intersectionArr.sorted()
+}
+if let intersectResult = commonElements(array1: [], array2: []) {
+    print(intersectResult)
+} else{
+    print("Неверное значение")
+}
+
+//Task 4.3
+//Напишите функцию removeDuplicates(_:), которая удаляет все дубликаты из массива.
+//Например, для массива [1, 2, 2, 3, 4, 4, 5] результат должен быть [1, 2, 3, 4, 5].
+func removeDuplicates(array: [Int]) -> [Int]? {
+    guard !array.isEmpty else {
+        return nil
+    }
+    let uniqueSet = Set(array)
+    return Array(uniqueSet).sorted()
+}
+
+if let dupResult = removeDuplicates(array: [1,1,1,1,2,3,4]) {
+    print(dupResult)
+} else {
+    print("Пустой массив")
+}
+
+//Task 4.4
+//Напишите функцию isLuckyTicket(_:), которая проверяет, является ли номер билета счастливым.
+//Билет считается счастливым, если сумма первых трех цифр равна сумме последних трех цифр.
+//Например, билет 123321 — счастливый, так как 1+2+3 = 3+2+1.
+
+func isLuckyTicket(luckyNumber: Int) -> Bool? {
+    let digitCount = String(luckyNumber)
+    guard digitCount.count == 6 else {
+        return nil
+    }
+    var countArr = [0,0]
+    var saveLuckyNumber = luckyNumber
+    for _ in 1...3{
+        countArr[0] += saveLuckyNumber % 10
+        saveLuckyNumber /= 10
+    }
+    for _ in 1...3{
+        countArr[1] += saveLuckyNumber % 10
+        saveLuckyNumber /= 10
+    }
+    if countArr[0] == countArr[1] {
+        return true
+    } else {
+        return false
+    }
+}
+if let luckyResult = isLuckyTicket(luckyNumber: 123123) {
+    if luckyResult == true {
+        print("Билет счастливый")
+    } else {
+        print("Билет несчастливый")
+    }
+} else {
+    print("Билет должен состоять только из 6 цифр")
+}
+
+//Task 4.5
+//Вычисление среднего значения
+//Напишите функцию average(numbers:), которая принимает массив чисел и возвращает их среднее значение.
+//Если массив пустой, функция должна вернуть nil.
+
+func average(numbers: [Double]) -> Double? {
+    guard !numbers.isEmpty else {
+        return nil
+    }
+    let arraySum = numbers.reduce(0,+)
+    return arraySum/Double(numbers.count)
+}
+
+if let averageResult = average(numbers: [-1, -2, 3, 4, 5]) {
+    print(averageResult)
+} else {
+    print("Массив пуст")
+}
